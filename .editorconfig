@@ -1,0 +1,11 @@
+
+[*.cs]
+
+# Namespace baseado nas pastas
+dotnet_style_namespace_match_folder = true:suggestion
+
+# Preferir namespace file-scoped
+csharp_style_namespace_declarations = file_scoped:suggestion
+
+# Organizar os using
+dotnet_sort_system_directives_first = true
