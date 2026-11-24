@@ -19,7 +19,7 @@ public class TaskItem: BaseEntity{
     public string Title { get; set; } = string.Empty;
 
     public string? Description { get; set; }
-  
+
     public StatusTask Status { get; set; } = StatusTask.ToDo;
 
     public TaskPriority Priority { get; set; } = TaskPriority.Medium;

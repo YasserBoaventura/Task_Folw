@@ -730,9 +730,6 @@
         }
       },
       "TaskFlow.Domain/1.0.0": {
-        "dependencies": {
-          "Microsoft.Extensions.Identity.Stores": "10.0.14"
-        },
         "runtime": {
           "TaskFlow.Domain.dll": {
             "assemblyVersion": "1.0.0.0",

@@ -4,9 +4,6 @@ using TaskFlow.Domain.Common;
 namespace TaskFlow.Domain.Entites;
 
 public class Project: BaseEntity{
-
-
-
     public string Name { get; set; } = string.Empty;
 
     public string? Description { get; set; }
