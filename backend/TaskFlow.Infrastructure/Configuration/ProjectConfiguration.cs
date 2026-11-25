@@ -6,8 +6,7 @@ using TaskFlow.Domain.Entites;
 namespace TaskFlow.Infrastructure.Configuration;
 
 
-public class ProjectConfiguration : IEntityTypeConfiguration<Project>
-{
+public class ProjectConfiguration : IEntityTypeConfiguration<Project>{ 
     public void Configure(EntityTypeBuilder<Project> builder)
     {
         builder.ToTable("Projects");

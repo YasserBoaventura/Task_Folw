@@ -3,11 +3,11 @@ using TaskFlow.Domain.Common;
 
 namespace TaskFlow.Domain.Entites;
 
-public class Project: BaseEntity{
+public class Project: BaseEntity{  
     public string Name { get; set; } = string.Empty;
 
     public string? Description { get; set; }
-
+  
     public DateOnly? StartDate { get; set; }
 
     public DateOnly? DueDate { get; set; }

@@ -15,18 +15,18 @@ public class ApplicationDbContext
     {
     }
 
-    //
-
+  
     public DbSet<Project> Projects => Set<Project>();
 
     public DbSet<ProjectMember> ProjectMembers => Set<ProjectMember>();
 
     public DbSet<TaskItem> TaskItems => Set<TaskItem>();
-
+ 
     public DbSet<Comment> Comments => Set<Comment>();
 
     public DbSet<Notification> Notifications => Set<Notification>();
 
+    public DbSet<RefreshToken> refreshTokens => Set<RefreshToken>(); 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

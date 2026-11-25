@@ -13,7 +13,7 @@ public class Notification: BaseEntity{
 
       public NotificationType Type { get; set; }
 
-      public bool IsRead { get; set; }
+      public bool IsRead { get; set; }  
 
        public DateTimeOffset? ReadAt { get; set; }
 

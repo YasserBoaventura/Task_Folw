@@ -5,11 +5,8 @@ using TaskFlow.Domain.Entites;
 
 namespace TaskFlow.Infrastructure.Configuration;
 
-public class TaskItemConfiguration
-    : IEntityTypeConfiguration<TaskItem>
-{
-    public void Configure(EntityTypeBuilder<TaskItem> builder)
-    {
+public class TaskItemConfiguration : IEntityTypeConfiguration<TaskItem>{  
+    public void Configure(EntityTypeBuilder<TaskItem> builder){ 
         builder.ToTable("TaskItems");
 
         builder.HasKey(x => x.Id);
@@ -81,5 +78,5 @@ public class TaskItemConfiguration
             .HasForeignKey(x => x.AssignedToId)
             .OnDelete(DeleteBehavior.Restrict);
     }
-}
+} 
 
