@@ -384,6 +384,46 @@ namespace TaskFlow.Infrastructure.Data.Migrations
                     b.ToTable("ProjectMembers", (string)null);
                 });
 
+            modelBuilder.Entity("TaskFlow.Domain.Entites.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTimeOffset>("ExpiresAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ReplacedByTokenHash")
+                        .HasMaxLength(64)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<DateTimeOffset?>("RevokedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("TokenHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TokenHash")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RefreshTokens", (string)null);
+                });
+
             modelBuilder.Entity("TaskFlow.Domain.Entites.TaskItem", b =>
                 {
                     b.Property<Guid>("Id")
@@ -554,6 +594,17 @@ namespace TaskFlow.Infrastructure.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("TaskFlow.Domain.Entites.RefreshToken", b =>
+                {
+                    b.HasOne("TaskFlow.Domain.Entites.ApplicationUser", "User")
+                        .WithMany("RefreshTokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("TaskFlow.Domain.Entites.TaskItem", b =>
                 {
                     b.HasOne("TaskFlow.Domain.Entites.ApplicationUser", "AssignedTo")
@@ -597,6 +648,8 @@ namespace TaskFlow.Infrastructure.Data.Migrations
                     b.Navigation("Notifications");
 
                     b.Navigation("ProjectMemberships");
+
+                    b.Navigation("RefreshTokens");
                 });
 
             modelBuilder.Entity("TaskFlow.Domain.Entites.Project", b =>

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+y/EvGtIOvk=",
+  "dgSpecHash": "wxXAOSm68rk=",
   "success": true,
   "projectFilePath": "C:\\Users\\user\\Desktop\\TaskFlow\\backend\\TaskFlow.Infrastructure\\TaskFlow.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -37,6 +37,10 @@
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.options\\10.0.14\\microsoft.extensions.options.10.0.14.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\10.0.14\\microsoft.extensions.options.configurationextensions.10.0.14.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.primitives\\10.0.14\\microsoft.extensions.primitives.10.0.14.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.identitymodel.abstractions\\8.14.0\\microsoft.identitymodel.abstractions.8.14.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\8.14.0\\microsoft.identitymodel.jsonwebtokens.8.14.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.identitymodel.logging\\8.14.0\\microsoft.identitymodel.logging.8.14.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.14.0\\microsoft.identitymodel.tokens.8.14.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.visualstudio.solutionpersistence\\1.0.52\\microsoft.visualstudio.solutionpersistence.1.0.52.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microting.entityframeworkcore.mysql\\10.0.14\\microting.entityframeworkcore.mysql.10.0.14.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\mono.texttemplating\\3.0.0\\mono.texttemplating.3.0.0.nupkg.sha512",
@@ -48,7 +52,8 @@
     "C:\\Users\\user\\.nuget\\packages\\system.composition.convention\\9.0.0\\system.composition.convention.9.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.composition.hosting\\9.0.0\\system.composition.hosting.9.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.composition.runtime\\9.0.0\\system.composition.runtime.9.0.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\system.composition.typedparts\\9.0.0\\system.composition.typedparts.9.0.0.nupkg.sha512"
+    "C:\\Users\\user\\.nuget\\packages\\system.composition.typedparts\\9.0.0\\system.composition.typedparts.9.0.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.14.0\\system.identitymodel.tokens.jwt.8.14.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -6,13 +6,8 @@ using TaskFlow.Domain.Entites;
 namespace TaskFlow.Infrastructure.Configuration;
 
 
-
-
-public class CommentConfiguration
-    : IEntityTypeConfiguration<Comment>
-{
-    public void Configure(EntityTypeBuilder<Comment> builder)
-    {
+public class CommentConfiguration : IEntityTypeConfiguration<Comment>{ 
+    public void Configure(EntityTypeBuilder<Comment> builder){ 
         builder.ToTable("Comments");
 
         builder.HasKey(x => x.Id); 

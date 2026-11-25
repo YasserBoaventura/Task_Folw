@@ -14,7 +14,7 @@ public class NotificationConfiguration
         builder.ToTable("Notifications");
 
         builder.HasKey(x => x.Id);
-
+  
         builder.Property(x => x.Title)
             .HasMaxLength(150)
             .IsRequired();

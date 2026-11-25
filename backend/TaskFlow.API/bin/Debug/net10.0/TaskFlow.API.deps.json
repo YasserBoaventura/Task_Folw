@@ -606,6 +606,7 @@
       },
       "TaskFlow.Application/1.0.0": {
         "dependencies": {
+          "System.IdentityModel.Tokens.Jwt": "8.19.2",
           "TaskFlow.Domain": "1.0.0"
         },
         "runtime": {
