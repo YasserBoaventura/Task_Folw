@@ -12,6 +12,6 @@ public class BaseEntity{
 
     public DateTimeOffset? UpdatedAt { get; set; }
 
-
+  
 
 }

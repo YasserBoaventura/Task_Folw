@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using TaskFlow.Application.DTOs.Auth;
+using TaskFlow.Domain.Entites;
 
 namespace TaskFlow.Application.Interfaces;
 
@@ -15,6 +16,8 @@ public interface IAuthService{
 
     Task LogoutAsync(RefreshTokenRequest request);
 
+
+    Task<List<ApplicationUser>> FindAllAsync(); 
 
 
 }

@@ -23,7 +23,7 @@ public class ApplicationDbContext
     public DbSet<TaskItem> TaskItems => Set<TaskItem>();
  
     public DbSet<Comment> Comments => Set<Comment>();
-
+ 
     public DbSet<Notification> Notifications => Set<Notification>();
 
     public DbSet<RefreshToken> refreshTokens => Set<RefreshToken>(); 

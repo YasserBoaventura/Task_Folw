@@ -8,11 +8,10 @@ namespace TaskFlow.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthController : ControllerBase{
+public sealed class AuthController : ControllerBase{
 
   private readonly  IAuthService _authService; 
    
-
   public AuthController(IAuthService authService){
     _authService = authService;
     
@@ -29,15 +28,15 @@ public class AuthController : ControllerBase{
         catch (InvalidOperationException ex){ 
             return BadRequest(new { message = ex.Message });
         }
-    }
+    } 
     
     [HttpPost("login")]
     [AllowAnonymous]
     public async Task<IActionResult> Login(LoginRequest request){
-        try{
+        try{  
             var response = await _authService.LoginAsync(request);
              return Ok(response);
-        }
+        } 
         catch (UnauthorizedAccessException ex){
             return Unauthorized(new { message = ex.Message });
         }
@@ -55,7 +54,14 @@ public class AuthController : ControllerBase{
         }
     }
 
-    [HttpPost("logout")] 
+
+ [HttpGet("findAll")]    
+ public async Task<IActionResult> findAll(){     
+    var list =  await _authService.FindAllAsync(); 
+    return Ok(list); 
+    }
+
+    [HttpPost("logout")]  
     [Authorize]
     public async Task<IActionResult> Logout(
         RefreshTokenRequest request){

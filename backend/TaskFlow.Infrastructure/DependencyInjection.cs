@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TaskFlow.Application.Interfaces;
+using TaskFlow.Application.Interfaces.Repository;
+using TaskFlow.Application.Interfaces.Services;
 using TaskFlow.Application.Services;
 using TaskFlow.Domain.Entites;
 using TaskFlow.Infrastructure.Data;
@@ -14,9 +16,10 @@ public static class DependencyInjection{
 
 public static IServiceCollection AddApplication(
         this IServiceCollection services)
-    {
+    {  //auth
         services.AddScoped<IAuthService, AuthService>();
-
+        //project
+        services.AddScoped<IProjectService, ProjectService>();
         return services;
     }
     public static IServiceCollection AddInfrastructure(
@@ -31,8 +34,10 @@ public static IServiceCollection AddApplication(
         var serverVersion =
             new MySqlServerVersion(new Version(8, 0, 0));
 
-     services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
-
+       //refreshToken
+       services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+       //projects   
+        services.AddScoped<IProjectRepository, ProjectRepository>();
         services.AddDbContext<ApplicationDbContext>(options =>
         {
             options.UseMySql(connectionString, serverVersion);
