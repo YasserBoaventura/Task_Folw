@@ -1,5 +1,6 @@
 using System;
 using TaskFlow.Application.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace TaskFlow.Application.Services;
 using System.IdentityModel.Tokens.Jwt;
@@ -13,7 +14,7 @@ using TaskFlow.Application.DTOs.Auth;
 using TaskFlow.Application.Options;
 using TaskFlow.Domain.Entites;
 
-public class AuthService : IAuthService{
+public class AuthService : IAuthService{  
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IRefreshTokenRepository _refreshTokenRepository;
     private readonly JwtOptions _jwtOptions;
@@ -27,8 +28,7 @@ public class AuthService : IAuthService{
             _jwtOptions = jwtOptions.Value;
     }
 
-    public async Task<AuthResponse> RegisterAsync(RegisterRequest request)
-    {
+    public async Task<AuthResponse> RegisterAsync(RegisterRequest request){ 
         var email = request.Email.Trim();
 
         var existingUser = await _userManager.FindByEmailAsync(email);
@@ -44,7 +44,7 @@ public class AuthService : IAuthService{
             FullName = request.FullName.Trim(),
             IsActive = true,
             EmailConfirmed = false
-        };
+        };  
 
         var result = await _userManager.CreateAsync(user, request.Password);
 
@@ -53,7 +53,7 @@ public class AuthService : IAuthService{
             var errors = string.Join(
                 "; ",
                 result.Errors.Select(x => x.Description));
-
+ 
             throw new InvalidOperationException(errors);
         }
 
@@ -63,15 +63,15 @@ public class AuthService : IAuthService{
     public async Task<AuthResponse> LoginAsync(LoginRequest request){
         var user = await _userManager.FindByEmailAsync(
             request.Email.Trim());
-
+    
         if (user == null || 
             !await _userManager.CheckPasswordAsync(user, request.Password))
         {
             throw new UnauthorizedAccessException(
                 "Email ou password inválidos.");
-        }
+        } 
 
-        if (!user.IsActive)
+        if (!user.IsActive)  
         {
             throw new UnauthorizedAccessException(
                 "Esta conta encontra-se desativada.");
@@ -79,7 +79,10 @@ public class AuthService : IAuthService{
 
         return await CreateAuthResponseAsync(user);
     }
-
+public Task<List<ApplicationUser>> FindAllAsync()
+{
+    return Task.FromResult(_userManager.Users.ToList());
+}
     public async Task<AuthResponse> RefreshAsync(
         RefreshTokenRequest request){ 
 

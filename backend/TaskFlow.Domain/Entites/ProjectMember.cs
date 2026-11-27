@@ -13,7 +13,7 @@ public class ProjectMember : BaseEntity{
 
     public DateTimeOffset JoinedAt { get; set; } =
         DateTimeOffset.UtcNow;
-
+ 
     public Project Project { get; set; } = null!;
 
     public ApplicationUser User { get; set; } = null!;

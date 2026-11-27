@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-
+using TaskFlow.API.Exceptions.Handler;
 using TaskFlow.Application.Options;
 using TaskFlow.Infrastructure;
 
@@ -13,6 +13,10 @@ builder.Services.AddApplication();
 
 // Infrastructure: MySQL, DbContext e Identity
 builder.Services.AddInfrastructure(builder.Configuration);
+
+// Global Exception Handler
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 // JWT settings
 var jwtOptions = builder.Configuration
@@ -60,13 +64,19 @@ builder.Services
         };
     });
 
+// Authorization
 builder.Services.AddAuthorization();
 
+// Controllers
 builder.Services.AddControllers();
 
+// OpenAPI
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+// Global Exception Middleware
+app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {

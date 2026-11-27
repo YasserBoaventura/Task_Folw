@@ -1,17 +1,16 @@
-using System;
-using TaskFlow.Domain.Common;
+using System; 
+using TaskFlow.Domain.Common;  
+namespace TaskFlow.Domain.Entites;    
 
-namespace TaskFlow.Domain.Entites;
+public class Project: BaseEntity{     
+    public string Name { get; set; } = string.Empty; 
 
-public class Project: BaseEntity{  
-    public string Name { get; set; } = string.Empty;
-
-    public string? Description { get; set; }
+    public string? Description { get; set; } 
   
-    public DateOnly? StartDate { get; set; }
+    public DateOnly? StartDate { get; set; } 
 
-    public DateOnly? DueDate { get; set; }
-
+    public DateOnly? DueDate { get; set; } 
+                                             
     public bool IsArchived { get; set; }
 
     public ICollection<ProjectMember> Members { get; set; }
@@ -21,7 +20,7 @@ public class Project: BaseEntity{
         = new List<TaskItem>();
 
 
-
+                                       
 
 
 }
