@@ -55,7 +55,7 @@ public sealed class ProjectService : IProjectService{
         Guid userId,
         CancellationToken cancellationToken = default){ 
         var projects = await _projectRepository.GetByUserIdAsync(
-            userId,     
+            userId,       
             cancellationToken);  
             if(projects is null)
             throw new ProjectNotFoundException();
@@ -94,7 +94,7 @@ public sealed class ProjectService : IProjectService{
               throw new ProjectNotFoundException(); 
 
         EnsureOwnerOrAdmin(project, userId);
-
+  
         if (project.IsArchived)
             throw new InvalidOperationException(
                 "Não é possível atualizar um projeto arquivado.");
@@ -118,9 +118,14 @@ public sealed class ProjectService : IProjectService{
         Guid userId,
         CancellationToken cancellationToken = default)
     {
+
         var project = await GetProjectOrThrowAsync(
             projectId,
             cancellationToken);
+            
+            if(project is null)
+            throw new ProjectNotFoundException(); 
+          
 
         EnsureOwnerOrAdmin(project, userId);
 
