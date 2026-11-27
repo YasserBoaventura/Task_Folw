@@ -9,7 +9,7 @@ namespace TaskFlow.API.Controllers;
 
 [ApiController]
 [Route("api/projects")]
-
+[Authorize] 
 public sealed class ProjectsController : ControllerBase{  
     private readonly IProjectService _projectService;
 
@@ -88,6 +88,7 @@ public sealed class ProjectsController : ControllerBase{
 
     // PATCH: api/projects/{id}/archive
     [HttpPatch("{id:guid}/archive")]
+    [Authorize(Roles = "Owner,Admin")]
     public async Task<IActionResult> Archive(
         Guid id,
         CancellationToken cancellationToken)
