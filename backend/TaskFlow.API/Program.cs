@@ -14,8 +14,9 @@ builder.Services.AddApplication();
 // Infrastructure: MySQL, DbContext e Identity
 builder.Services.AddInfrastructure(builder.Configuration);
 
-//GlobalExceptionHandler 
+// Global Exception Handler
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 // JWT settings
 var jwtOptions = builder.Configuration
@@ -63,17 +64,19 @@ builder.Services
         };
     });
 
+// Authorization
 builder.Services.AddAuthorization();
 
+// Controllers
 builder.Services.AddControllers();
 
+// OpenAPI
 builder.Services.AddOpenApi();
 
-
-builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
-builder.Services.AddProblemDetails();
 var app = builder.Build();
 
+// Global Exception Middleware
+app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {

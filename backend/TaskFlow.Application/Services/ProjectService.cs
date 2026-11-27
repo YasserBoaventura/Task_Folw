@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Mvc;
 using TaskFlow.Application.DTOs.Projects;
 using TaskFlow.Application.Exceptions;
 using TaskFlow.Application.Interfaces.Repository;
@@ -54,22 +55,27 @@ public sealed class ProjectService : IProjectService{
         Guid userId,
         CancellationToken cancellationToken = default){ 
         var projects = await _projectRepository.GetByUserIdAsync(
-            userId,
-            cancellationToken);
+            userId,     
+            cancellationToken);  
+            if(projects is null)
+            throw new ProjectNotFoundException();
 
         return projects
             .Select(project => MapToResponse(project, userId))
             .ToList();
     }
-
+  
  public async Task<ProjectResponse> GetByIdAsync(
     Guid projectId,
     Guid userId,
-    CancellationToken cancellationToken = default)
-{
+    CancellationToken cancellationToken = default){   
     var project = await GetProjectOrThrowAsync(
         projectId,
         cancellationToken);
+        
+        
+        if(project is null)
+    throw new ProjectNotFoundException(); 
 
     EnsureMembership(project, userId);
 
@@ -79,11 +85,13 @@ public sealed class ProjectService : IProjectService{
         Guid projectId,
         Guid userId,
         UpdateProjectRequest request,
-        CancellationToken cancellationToken = default)
-    {
+        CancellationToken cancellationToken = default){ 
         var project = await GetProjectOrThrowAsync(
             projectId,
             cancellationToken);
+
+            if(project is null)
+              throw new ProjectNotFoundException(); 
 
         EnsureOwnerOrAdmin(project, userId);
 
@@ -127,16 +135,19 @@ public sealed class ProjectService : IProjectService{
             cancellationToken);
     }
 
-  private async Task<Project> GetProjectOrThrowAsync(
+ private async Task<Project> GetProjectOrThrowAsync(
     Guid projectId,
     CancellationToken cancellationToken)
 {
-    return await _projectRepository.GetByIdAsync(
+    var project = await _projectRepository.GetByIdAsync(
         projectId,
-        cancellationToken)
-        ?? throw new ProjectNotFoundException();
-}
+        cancellationToken);
 
+    if (project is null)
+        throw new ProjectNotFoundException();
+
+    return project;
+}
     private static void EnsureMembership(
         Project project,
         Guid userId)
@@ -164,8 +175,7 @@ public sealed class ProjectService : IProjectService{
 
     private static void ValidateDates(
         DateOnly? startDate,
-        DateOnly? dueDate)
-    {
+        DateOnly? dueDate){   
         if (startDate.HasValue &&
             dueDate.HasValue &&
             dueDate.Value < startDate.Value)

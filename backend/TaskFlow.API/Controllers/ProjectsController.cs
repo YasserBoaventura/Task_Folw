@@ -9,7 +9,7 @@ namespace TaskFlow.API.Controllers;
 
 [ApiController]
 [Route("api/projects")]
-[Authorize] 
+
 public sealed class ProjectsController : ControllerBase{  
     private readonly IProjectService _projectService;
 
@@ -35,7 +35,7 @@ public sealed class ProjectsController : ControllerBase{
             result);
     }
 
-
+  
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ProjectResponse>>> GetMyProjects(
         CancellationToken cancellationToken){ 
@@ -83,6 +83,9 @@ public sealed class ProjectsController : ControllerBase{
         return Ok(project);
     }
 
+ 
+    
+
     // PATCH: api/projects/{id}/archive
     [HttpPatch("{id:guid}/archive")]
     public async Task<IActionResult> Archive(
@@ -106,4 +109,6 @@ public sealed class ProjectsController : ControllerBase{
 
         return Guid.TryParse(userIdValue, out userId);
     }
+
+
 }

@@ -1,11 +1,12 @@
-using System;
+
 using Microsoft.AspNetCore.Diagnostics;
 using TaskFlow.API.Exceptions.Response;
 using TaskFlow.Application.Exceptions;
 
 namespace TaskFlow.API.Exceptions.Handler;
 
-public sealed class GlobalExceptionHandler  : IExceptionHandler{  
+public sealed class GlobalExceptionHandler : IExceptionHandler
+{
     private readonly ILogger<GlobalExceptionHandler> _logger;
 
     public GlobalExceptionHandler(
@@ -17,38 +18,32 @@ public sealed class GlobalExceptionHandler  : IExceptionHandler{
     public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext,
         Exception exception,
-        CancellationToken cancellationToken)
-    {
+        CancellationToken cancellationToken){  
         var (statusCode, message) = exception switch
         {
             ProjectNotFoundException =>
-                (StatusCodes.Status404NotFound, "Projeto não encontrado."),
+                (404, "Projeto não encontrado."),
 
             ProjectForbiddenException =>
-                (StatusCodes.Status403Forbidden, "Não tens permissão para realizar esta operação."),
+                (403, "Não tens permissão para realizar esta operação."),
 
             ArgumentException =>
-                (StatusCodes.Status400BadRequest, exception.Message),
+                (400, exception.Message),
 
             InvalidOperationException =>
-                (StatusCodes.Status400BadRequest, exception.Message),
+                (400, exception.Message),
 
             _ =>
-                (StatusCodes.Status500InternalServerError, "Ocorreu um erro interno no servidor.")
+                (500, "Ocorreu um erro interno no servidor.")
         };
 
         if (statusCode >= 500)
         {
-            _logger.LogError(
-                exception,
-                "Erro não tratado durante o processamento do pedido.");
+            _logger.LogError(exception, "Erro interno.");
         }
         else
         {
-            _logger.LogWarning(
-                exception,
-                "Pedido rejeitado: {Message}",
-                exception.Message);
+            _logger.LogWarning(exception, "Pedido rejeitado.");
         }
 
         httpContext.Response.StatusCode = statusCode;
@@ -58,9 +53,7 @@ public sealed class GlobalExceptionHandler  : IExceptionHandler{
             {
                 StatusCode = statusCode,
                 Message = message,
-                Detail = statusCode == StatusCodes.Status500InternalServerError
-                    ? null
-                    : exception.Message,
+                Detail = statusCode == 500 ? null : exception.Message,
                 Timestamp = DateTimeOffset.UtcNow
             },
             cancellationToken);
@@ -68,6 +61,3 @@ public sealed class GlobalExceptionHandler  : IExceptionHandler{
         return true;
     }
 }
-
-
-
